@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
         switch(sceneName)
         {
             case "MainMenu":
-                SceneManager.LoadScene("MainMenu");
+                SceneManager.LoadScene("MainMenuScene");
                 break;
             case "Game":
                 SceneManager.LoadScene("Game");

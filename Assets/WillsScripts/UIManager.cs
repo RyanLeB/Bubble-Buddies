@@ -71,6 +71,12 @@ public class UIManager : MonoBehaviour
             case "Controls":
                 controlsMenu.SetActive(true);
                 break;
+            case "Options":
+                settingsMenu.SetActive(true);
+                break;
+            case null:
+                Debug.Log(UI + " is null");
+                break;
         }
     }
 }

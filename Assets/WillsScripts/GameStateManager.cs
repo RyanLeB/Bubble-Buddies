@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameStateManager : MonoBehaviour
 {
-    public enum GameState
+    public enum GameState // game states
     {
         MainMenu,
         Game,
@@ -15,7 +15,7 @@ public class GameStateManager : MonoBehaviour
         Credits,
         Controls
     }
-    [SerializeField] private GameState currentGameState;
-    
+    public GameState currentGameState;//current game state
+
 
 }
