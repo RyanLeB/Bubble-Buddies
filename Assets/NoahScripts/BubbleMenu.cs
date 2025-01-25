@@ -25,7 +25,7 @@ public class BubbleSpawner : MonoBehaviour
         }
     }
 
-    void Update()
+    void Update() 
     {
         // Check for bubble popping
         if (Input.GetMouseButtonDown(0)) // Left-click to pop bubbles
@@ -43,7 +43,7 @@ public class BubbleSpawner : MonoBehaviour
         }
     }
 
-    void SpawnBubble()
+    void SpawnBubble() // Spawn a new bubble at a random position
     {
         Vector2 spawnPosition = GetRandomPositionWithinCamera();
         GameObject newBubble = Instantiate(bubblePrefab, spawnPosition, Quaternion.identity);
@@ -59,7 +59,7 @@ public class BubbleSpawner : MonoBehaviour
         bubbles.Add(newBubble);
     }
 
-    void DestroyBubble(GameObject bubble)
+    void DestroyBubble(GameObject bubble) // Destroy a bubble and spawn a new one, using mouse click
     {
         bubbles.Remove(bubble);
         Destroy(bubble);
@@ -68,12 +68,14 @@ public class BubbleSpawner : MonoBehaviour
         {
             AudioSource.PlayClipAtPoint(popSound, Camera.main.transform.position);
         }
+        
+        // Particle effect or other visual feedback can be added here
 
         // Spawn a new bubble
         SpawnBubble();
     }
 
-    Vector2 GetRandomPositionWithinCamera()
+    Vector2 GetRandomPositionWithinCamera() // Get a random position within the camera's view
     {
         float x = Random.Range(0f, 1f);
         float y = Random.Range(0f, 1f);
@@ -94,16 +96,20 @@ public class BubbleSpawner : MonoBehaviour
                 Vector3 position = bubble.transform.position;
                 Vector3 viewportPosition = mainCamera.WorldToViewportPoint(position);
 
-                // Bounce off screen edges
-                if (viewportPosition.x <= 0f || viewportPosition.x >= 1f)
+                // Bounce off screen edges and reposition if outside
+                if (viewportPosition.x < 0f || viewportPosition.x > 1f)
                 {
+                    position.x = Mathf.Clamp(position.x, mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x, mainCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x);
                     rb.velocity = new Vector2(-rb.velocity.x, rb.velocity.y);
                 }
 
-                if (viewportPosition.y <= 0f || viewportPosition.y >= 1f)
+                if (viewportPosition.y < 0f || viewportPosition.y > 1f)
                 {
+                    position.y = Mathf.Clamp(position.y, mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y, mainCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y);
                     rb.velocity = new Vector2(rb.velocity.x, -rb.velocity.y);
                 }
+
+                bubble.transform.position = position;
             }
         }
         
@@ -130,12 +136,12 @@ public class BubbleSpawner : MonoBehaviour
                         Vector2 relativeVelocity = rbA.velocity - rbB.velocity;
                         float velocityAlongDirection = Vector2.Dot(relativeVelocity, direction);
 
-                        //if (velocityAlongDirection < 0)
-                        //{
-                        //    Vector2 impulse = direction * velocityAlongDirection * -1f; 
-                        //    rbA.velocity += impulse;
-                        //    rbB.velocity -= impulse;
-                        //}
+                        if (velocityAlongDirection < 0)
+                        {
+                            Vector2 impulse = direction * velocityAlongDirection * -1f; 
+                            rbA.velocity += impulse;
+                            rbB.velocity -= impulse;
+                        }
                     }
                 }
             }
