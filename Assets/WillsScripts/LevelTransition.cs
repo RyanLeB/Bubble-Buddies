@@ -5,57 +5,66 @@ using UnityEngine;
 public class LevelTransition : MonoBehaviour
 {
     [Header("Level Generation Settings")]
-    [SerializeField] private GameObject[] levelSegments; // array of level segments
-    [SerializeField] private Transform spawnPoint; // spawn point
-    [SerializeField] private int maxActiveSegments; // max active segments
-    [SerializeField] private Transform player; // reference to the player
-    [SerializeField] private float triggerDistance = 10f; // distance to trigger segment generation
+    [SerializeField] private List<GameObject> LevelPrefab; // level prefab
+    [SerializeField] private int levelIndex; // level index
+    [SerializeField] private Transform playerTransform; // reference to the player's transform
+    [SerializeField] private float distanceInFrontOfPlayer = 10f; // distance in front of the player to spawn the level
+    [SerializeField] private int maxLevelInScene = 1; // maximum number of levels in the scene
+    [SerializeField] private int spawnedLevelCount = 0; // number of levels spawned in the scene
 
-    private Queue<GameObject> activeSegments = new Queue<GameObject>(); // queue of active segments
+    private GameObject currentLevelSegment;
 
     void Start()
     {
-        for (int i = 0; i < maxActiveSegments; i++)
+        Debug.Log("Starting level transition");
+        levelIndex = 0;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        Vector3 spawnPosition = playerTransform.position + playerTransform.forward * distanceInFrontOfPlayer;
+        currentLevelSegment = Instantiate(LevelPrefab[levelIndex], spawnPosition, Quaternion.identity);
+        spawnedLevelCount++;
+    }
+
+    public void SpawnNextLevel()
+    {
+        if (spawnedLevelCount >= maxLevelInScene)
         {
-            GenerateSegment();
+            Debug.Log("Maximum level count reached. Deleting previous level segment.");
+            DeletePreviousLevelSegment();
+        }
+
+        Debug.Log("Spawning next level");
+        levelIndex++;
+        Vector3 spawnPosition = playerTransform.position + playerTransform.forward * distanceInFrontOfPlayer;
+        currentLevelSegment = Instantiate(LevelPrefab[levelIndex], spawnPosition, Quaternion.identity);
+        spawnedLevelCount++;
+
+        // Add a new level prefab to the list
+        AddNewLevelPrefab();
+    }
+
+    void DeletePreviousLevelSegment()
+    {
+        if (currentLevelSegment != null)
+        {
+            Destroy(currentLevelSegment);
+            spawnedLevelCount--;
         }
     }
 
-    void Update()
+    void AddNewLevelPrefab()
     {
-        if (Vector3.Distance(player.position, spawnPoint.position) < triggerDistance)
+        // Assuming you have a method to get a new level prefab
+        GameObject newLevelPrefab = GetNewLevelPrefab();
+        if (newLevelPrefab != null)
         {
-            GenerateSegment();
+            LevelPrefab.Add(newLevelPrefab);
+            Debug.Log("New level prefab added to the list.");
         }
     }
 
-    /// <summary>
-    /// Generate a level segment
-    /// </summary>
-    public void GenerateSegment()
+    GameObject GetNewLevelPrefab()
     {
-        int randomSegment = Random.Range(0, levelSegments.Length);
-        GameObject segment = Instantiate(levelSegments[randomSegment], spawnPoint.position, Quaternion.identity);
-        activeSegments.Enqueue(segment);
-
-        UpdateSpawnPoint(segment);
-
-        if (activeSegments.Count > maxActiveSegments)
-        {
-            GameObject oldSegment = activeSegments.Dequeue();
-            Destroy(oldSegment);
-        }
-    }
-
-    /// <summary>
-    /// Update the spawn point
-    /// </summary>
-    void UpdateSpawnPoint(GameObject seg)
-    {
-        Transform exitPoint = seg.transform.Find("ExitPoint");
-        if (exitPoint != null)
-        {
-            spawnPoint.position = exitPoint.position;
-        }
+        LevelPrefab.Add(LevelPrefab[levelIndex]);
+        return LevelPrefab[levelIndex];
     }
 }
