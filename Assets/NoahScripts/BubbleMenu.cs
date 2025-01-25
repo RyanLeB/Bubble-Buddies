@@ -3,16 +3,18 @@ using System.Collections.Generic;
 
 public class BubbleSpawner : MonoBehaviour
 {
+    /* This script spawns bubbles at random positions within the camera's view, and allows the player to pop them by clicking on them.
+    Main Menu interaction to use this script*/ 
+    
     public GameObject bubblePrefab; // Prefab for the bubble
     public int maxBubbles = 10; // Maximum number of bubbles on screen
     public float bubbleSpeed = 5f; // Speed of the bubbles
 
-    private List<GameObject> bubbles = new List<GameObject>();
+    private List<GameObject> bubbles = new List<GameObject>(); // List to store all bubbles
     private Camera mainCamera;
     
     // Sound effects
-    public AudioClip popSound;
-    public 
+    public AudioClip popSound; // Sound effect for popping bubbles
 
     void Start()
     {
@@ -118,8 +120,8 @@ public class BubbleSpawner : MonoBehaviour
         {
             for (int j = i + 1; j < bubbles.Count; j++)
             {
-                GameObject bubbleA = bubbles[i];
-                GameObject bubbleB = bubbles[j];
+                GameObject bubbleA = bubbles[i]; // Bubble A that moves in to Bubble B 
+                GameObject bubbleB = bubbles[j]; // Bubble B that moves in to Bubble A
 
                 Rigidbody2D rbA = bubbleA.GetComponent<Rigidbody2D>();
                 Rigidbody2D rbB = bubbleB.GetComponent<Rigidbody2D>();

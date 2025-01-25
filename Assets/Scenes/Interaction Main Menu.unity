@@ -290,8 +290,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubblePrefab: {fileID: 1364835706498766927, guid: ccf4dcdd8e900aa44ba2c978bb2f2d6e, type: 3}
-  maxBubbles: 120
+  maxBubbles: 100
   bubbleSpeed: 2
+  popSound: {fileID: 0}
 --- !u!4 &1614658601
 Transform:
   m_ObjectHideFlags: 0
