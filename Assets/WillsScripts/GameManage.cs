@@ -9,6 +9,8 @@ public class GameManage : MonoBehaviour
     [SerializeField] private LevelManager levelManager;//level manager
     [SerializeField] private Singleton singleton;//singleton
     [SerializeField] private UIManager uiManager;//UI manager
+    [Header("Variables")]
+    [SerializeField] private bool isPaused;//is the game paused
 
     // Start is called before the first frame update
     void Start()
@@ -23,8 +25,19 @@ public class GameManage : MonoBehaviour
     /// </summary>
     public void PauseGame()
     {
-        gameStateManager.currentGameState = GameStateManager.GameState.Pause;
-        uiManager.SetUI("Pause");
-        Time.timeScale = 0;
+        if(!isPaused)
+        {
+            isPaused = true;
+            gameStateManager.currentGameState = GameStateManager.GameState.Pause;
+            uiManager.SetUI("Pause");
+            Time.timeScale = 0;
+        }
+        else if(isPaused)
+        {
+            isPaused = false;
+            gameStateManager.currentGameState = GameStateManager.GameState.Game;
+            uiManager.SetUI("GameUI");
+            Time.timeScale = 1;
+        }
     }
 }
