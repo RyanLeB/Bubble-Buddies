@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.49, y: 2.08, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 084a5d62e36e121478109099338597df, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -106,6 +106,24 @@ MonoBehaviour:
   squishCooldown: 1
   recoilFactor: 1.1
   maxSpeed: 10
+  bubbleSprites:
+  - {fileID: 21300000, guid: 67cecfd18ecd0e442b560dda64506d43, type: 3}
+  - {fileID: 21300000, guid: 1e3882d2a2955e34cbed187d4cf6f4c7, type: 3}
+  - {fileID: 21300000, guid: f1d5a058ddf0f84428d9eb36bb237d12, type: 3}
+  - {fileID: 21300000, guid: 239c98aed98927041aa1162c8aefcf77, type: 3}
+  - {fileID: 21300000, guid: 627500a9ed1f2594c8260e2545e9625a, type: 3}
+  - {fileID: 21300000, guid: 084a5d62e36e121478109099338597df, type: 3}
+  faceSprites:
+  - {fileID: 21300000, guid: c158c15f20398124d878a1d6ba1bc0ba, type: 3}
+  - {fileID: 21300000, guid: 413151560bf3cea4c8ade1ce150e9179, type: 3}
+  - {fileID: 21300000, guid: 7edafdcca8c84124fb51fcf83e8b97df, type: 3}
+  - {fileID: 21300000, guid: 6c799673c9f7d1545b0a2d05ba79ca69, type: 3}
+  - {fileID: 21300000, guid: a36ec3ef03895ec4e92498ec5f2c1884, type: 3}
+  - {fileID: 21300000, guid: 866a7eb2cdf1e134c96089f26dba9f1b, type: 3}
+  - {fileID: 21300000, guid: ad5a9406735ae2a44a87b5d7311f58f9, type: 3}
+  - {fileID: 21300000, guid: a97bd6e0395acb74798521d7ef6a608f, type: 3}
+  - {fileID: 21300000, guid: 0545db0e89fd4144f9aeeaa4de0d4f96, type: 3}
+  - {fileID: 21300000, guid: 8a4f39397c2696f4ab10a04b17336bfa, type: 3}
 --- !u!50 &6781308036890457841
 Rigidbody2D:
   serializedVersion: 4
@@ -165,6 +183,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0017420053, y: 0}
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.12197206

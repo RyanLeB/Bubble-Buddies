@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class BubbleHorde : MonoBehaviour
 {
@@ -11,6 +11,9 @@ public class BubbleHorde : MonoBehaviour
     public float squishCooldown = 1f;
     public float recoilFactor = 1.1f;
     public float maxSpeed = 10f;
+
+    public List<Sprite> bubbleSprites; 
+    public List<Sprite> faceSprites; 
 
     private Rigidbody2D rb;
     private Vector3 originalScale;
@@ -49,6 +52,9 @@ public class BubbleHorde : MonoBehaviour
         collider.sharedMaterial = material;
 
         originalScale = transform.localScale;
+
+        
+        SetRandomSprite();
     }
 
     void Update()
@@ -107,5 +113,35 @@ public class BubbleHorde : MonoBehaviour
         transform.localScale = originalScale;
         yield return new WaitForSeconds(squishCooldown);
         canSquish = true;
+    }
+
+    void SetRandomSprite()
+    {
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer == null)
+        {
+            spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+        }
+
+        if (bubbleSprites.Count > 0)
+        {
+            spriteRenderer.sprite = bubbleSprites[Random.Range(0, bubbleSprites.Count)];
+        }
+
+        if (faceSprites.Count > 0)
+        {
+            
+            GameObject face = new GameObject("Face");
+            face.transform.SetParent(transform);
+            face.transform.localPosition = Vector3.zero;
+            SpriteRenderer faceRenderer = face.AddComponent<SpriteRenderer>();
+            faceRenderer.sprite = faceSprites[Random.Range(0, faceSprites.Count)];
+
+            
+            faceRenderer.sortingOrder = spriteRenderer.sortingOrder + 1;
+
+            
+            face.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
     }
 }
