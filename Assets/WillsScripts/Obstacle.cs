@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
-    [SerializeField] Camera mainCamera;
-    [SerializeField] private float destroyOffset = 0.1f;
+    [SerializeField] private float speed = 5f;//speed of the obstacle
+    [SerializeField] Camera mainCamera;//main camera
+    [SerializeField] private float destroyOffset = 0.1f;//offset to destroy the obstacle
     void Start()
     {
         mainCamera = Camera.main;
@@ -42,6 +42,10 @@ public class Obstacle : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
+        {
+            Destroy(other.gameObject);
+        }
+        else if(other.CompareTag("Bubble"))
         {
             Destroy(other.gameObject);
         }
