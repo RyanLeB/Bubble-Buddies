@@ -9,13 +9,14 @@ public class GameManage : MonoBehaviour
     [SerializeField] private LevelManager levelManager;//level manager
     [SerializeField] private Singleton singleton;//singleton
     [SerializeField] private UIManager uiManager;//UI manager
-    [SerializeField] private SoundManager soundManager;//sound manager
+    public SoundManager soundManager;//sound manager
     [Header("Variables")]
     [SerializeField] private bool isPaused;//is the game paused
 
     // Start is called before the first frame update
     void Start()
     {
+        soundManager.PlayMusic("BubbleBuddies");
         gameStateManager = GameObject.Find("GameStateManager").GetComponent<GameStateManager>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         singleton = GameObject.Find("Singleton").GetComponent<Singleton>();

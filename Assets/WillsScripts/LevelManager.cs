@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    public GameManage gameManager;
+    
     public string scenename;
     /// <summary>
     /// Load the scene that is passed in
@@ -18,6 +20,7 @@ public class LevelManager : MonoBehaviour
         {
             case "MainMenu":
                 SceneManager.LoadScene("MainMenuScene");
+                gameManager.soundManager.PlayMusic("BubbleBuddies");
                 break;
             case "Game":
                 SceneManager.LoadScene("Game");
