@@ -351,12 +351,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubblePrefabs:
   - {fileID: 1364835706498766927, guid: ccf4dcdd8e900aa44ba2c978bb2f2d6e, type: 3}
+  - {fileID: 1364835706498766927, guid: 0744fda1f2fba594da211570e692b84e, type: 3}
+  - {fileID: 1364835706498766927, guid: aa90d0e2515d21a48b34ebb788367f45, type: 3}
   - {fileID: 1364835706498766927, guid: 8f1dccda5abab8147a2b8b2189d62227, type: 3}
   - {fileID: 1364835706498766927, guid: 2eb1676ad3a6a99429d53102b1219e32, type: 3}
   - {fileID: 1364835706498766927, guid: ee83cbb7a4b16574da5502c129c5ccd3, type: 3}
-  - {fileID: 1364835706498766927, guid: 0744fda1f2fba594da211570e692b84e, type: 3}
-  maxBubbles: 10
-  bubbleSpeed: 5
+  maxBubbles: 100
+  bubbleSpeed: 2
   popInDuration: 0.5
   scaleBubble: 5
   faceSprites:
