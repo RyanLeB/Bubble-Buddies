@@ -5,10 +5,10 @@ using UnityEngine;
 public class WinBehavior : MonoBehaviour
 {
     [SerializeField] private GameObject player;//player game object
-    [SerializeField] private UIManager uIManager;//UI manager
+    [SerializeField] private LevelTransition levelTransition;//level transition
     void Start()
     {
-        uIManager = FindObjectOfType<UIManager>();
+        levelTransition = FindObjectOfType<LevelTransition>();
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -16,8 +16,7 @@ public class WinBehavior : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            uIManager.WinGame();
-            player.SetActive(false);
+            levelTransition.SpawnNextLevel();
         }
     }
 }
