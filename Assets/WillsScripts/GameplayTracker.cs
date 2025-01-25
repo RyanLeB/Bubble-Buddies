@@ -13,6 +13,7 @@ public class GameplayTracker : MonoBehaviour
     [SerializeField] private GameObject endPoint;//end point of the level
     [SerializeField] private GameObject player;//player object
     [SerializeField] private TextMeshProUGUI scoreText;//score text
+    [SerializeField] private TextMeshProUGUI bubbleText;//bubble text
     [SerializeField] private GameObject[] bubbleBuddy;//bubble buddy prefab
     public int bubblesSaved;//bubbles saved
     [Header("Obstacle values")]
@@ -23,6 +24,9 @@ public class GameplayTracker : MonoBehaviour
 
     private float totalDistance;
     private float pointsPerSecond = 0.1f; // Points added per second
+    private float waveFrequency = 2f; // Frequency of the wave effect
+    private float waveAmplitude = 5f; // Amplitude of the wave effect
+    private float rainbowSpeed = 2f; // Speed of the rainbow effect
 
     private void Start()
     {
@@ -45,7 +49,7 @@ public class GameplayTracker : MonoBehaviour
     {
         FindBubbleBuddies();
         AddScorePerSecond();
-        //BubbleTracker();
+        UpdateScoreText();
     }
     /// <summary>
     /// Track the player distance
@@ -65,21 +69,58 @@ public class GameplayTracker : MonoBehaviour
     {
         bubbleBuddy = GameObject.FindGameObjectsWithTag("Bubble");
     }
+
     /// <summary>
     /// Add score
     /// </summary>
     public void AddScore(float score)
     {
         currentScore += score;
-        scoreText.text = "Score: " + currentScore.ToString("F2");
+        UpdateScoreText();
     }
+    /// <summary>
+    /// Update the score text with wave and rainbow effect
+    /// </summary>
+    private void UpdateScoreText()
+    {
+        string scoreString = "Score: " + currentScore.ToString("F2");
+        if (bubbleBuddy.Length > 0)
+        {
+            bubbleText.text = " Bubbles: " + bubbleBuddy.Length;
+            bubbleText.text = ApplyWaveAndRainbowEffect(bubbleText.text);
+        }
+        else 
+        {
+            bubbleText.text = "";
+        }
+
+        scoreText.text = scoreString;
+    }
+
+    /// <summary>
+    /// Apply wave and rainbow effect to the text
+    /// </summary>
+    private string ApplyWaveAndRainbowEffect(string text)
+    {
+        string result = "";
+        for (int i = 0; i < text.Length; i++)
+        {
+            char c = text[i];
+            float wave = Mathf.Sin(Time.time * waveFrequency + i * 0.5f) * waveAmplitude;
+            Color color = Color.HSVToRGB((Time.time * rainbowSpeed + i * 0.1f) % 1f, 1f, 1f);
+            string colorHex = ColorUtility.ToHtmlStringRGB(color);
+            result += $"<color=#{colorHex}><size={wave + 30}>{c}</size></color>";
+        }
+        return result;
+    }
+
     /// <summary>
     /// Add score per second
     /// </summary>
     private void AddScorePerSecond()
     {
         currentScore += pointsPerSecond;
-        scoreText.text = "Score: " + currentScore.ToString("F2");
+        UpdateScoreText();
     }
     /// <summary>
     /// Find the Checkpoints
@@ -95,7 +136,6 @@ public class GameplayTracker : MonoBehaviour
     public void CheckpointReached()
     {
         FindObstacles();
-        AddScore(10);
     }
     /// <summary>
     /// Bubble Tracker for final score
