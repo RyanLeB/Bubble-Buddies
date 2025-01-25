@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
+    public string scenename;
     /// <summary>
     /// Load the scene that is passed in
     /// </summary>
@@ -12,6 +13,7 @@ public class LevelManager : MonoBehaviour
     /// <returns></returns>
     public void LoadScene(string sceneName)
     {
+        scenename = sceneName;
         switch(sceneName)
         {
             case "MainMenu":

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bubble
   - Checkpoint
+  - Win
   layers:
   - Default
   - TransparentFX

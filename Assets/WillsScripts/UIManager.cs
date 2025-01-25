@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UIManager : MonoBehaviour
 {
@@ -13,13 +14,32 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject settingsMenu;//Settings menu object
     [SerializeField] private GameObject creditsMenu;//Credits menu object
     [SerializeField] private GameObject controlsMenu;//Controls menu object
+    [Header("Class Calls")]
+    [SerializeField] private GameplayTracker gameplayTracker;//Gameplay tracker object
+    [SerializeField] private LevelManager levelManager;//Level manager object
+    [Header("Win Stats")]
+    [SerializeField] private GameObject[] survivingBubbles;//Bubble object
+    [SerializeField] private int bubblesSaved;//Bubbles saved
+    [SerializeField] private int bubblesLost;//Bubbles lost
+    [SerializeField] private TextMeshProUGUI bubblesSavedText;//Bubbles saved text
+    [SerializeField] private TextMeshProUGUI bubblesLostText;//Bubbles lost text
+
     [Header("Game State")]
     [SerializeField] private GameStateManager gameStateManager;//Game state manager object
     // Start is called before the first frame update
     void Start()
     {
         gameStateManager = GameObject.Find("GameStateManager").GetComponent<GameStateManager>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         SetUI("MainMenu");
+    }
+    void Update()
+    {
+        if(levelManager.scenename == "Game")
+        {
+            gameplayTracker = FindObjectOfType<GameplayTracker>();
+        }
+        survivingBubbles = GameObject.FindGameObjectsWithTag("Bubble");
     }
 
     /// <summary>
@@ -78,5 +98,11 @@ public class UIManager : MonoBehaviour
                 Debug.Log(UI + " is null");
                 break;
         }
+    }
+    public void WinGame()
+    {
+        SetUI("GameWin");
+        gameplayTracker.BubbleTracker();
+        bubblesSavedText.text = "Bubbles Saved: " + gameplayTracker.bubblesSaved;
     }
 }
