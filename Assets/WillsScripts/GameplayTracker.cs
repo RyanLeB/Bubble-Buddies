@@ -8,7 +8,7 @@ public class GameplayTracker : MonoBehaviour
 {
     [Header("Gameplay Tracker")]
     [Header("Gameplay values")]
-    [SerializeField] private int currentScore;//current score
+    public int currentScore;//current score
     [SerializeField] private GameObject startPoint;//start point of the level
     [SerializeField] private GameObject endPoint;//end point of the level
     [SerializeField] private GameObject player;//player object

@@ -23,6 +23,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private int bubblesLost;//Bubbles lost
     [SerializeField] private TextMeshProUGUI bubblesSavedText;//Bubbles saved text
     [SerializeField] private TextMeshProUGUI bubblesLostText;//Bubbles lost text
+    [SerializeField] private TextMeshProUGUI scoreText;//Score text
 
     [Header("Game State")]
     [SerializeField] private GameStateManager gameStateManager;//Game state manager object
@@ -104,5 +105,6 @@ public class UIManager : MonoBehaviour
         SetUI("GameWin");
         gameplayTracker.BubbleTracker();
         bubblesSavedText.text = "Bubbles Saved: " + gameplayTracker.bubblesSaved;
+        scoreText.text = "Score: " + gameplayTracker.currentScore;
     }
 }

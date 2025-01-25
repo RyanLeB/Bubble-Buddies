@@ -1367,7 +1367,8 @@ MonoBehaviour:
   bubblesSaved: 0
   bubblesLost: 0
   bubblesSavedText: {fileID: 776808385}
-  bubblesLostText: {fileID: 932282503}
+  bubblesLostText: {fileID: 0}
+  scoreText: {fileID: 932282503}
   gameStateManager: {fileID: 0}
 --- !u!1 &696489080
 GameObject:
