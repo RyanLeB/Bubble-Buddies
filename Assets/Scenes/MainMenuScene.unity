@@ -3620,12 +3620,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1502290230}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d452ae7a3265d154eb8a667ccfc8cdcd, type: 3}
+  m_Script: {fileID: 11500000, guid: b45ca9c7c87cd634db3c7369ad3c47f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  offset: -10
-  levelManager: {fileID: 0}
+  offset: 5
+  levelManager: {fileID: 859343124}
 --- !u!1 &1565955222
 GameObject:
   m_ObjectHideFlags: 0
