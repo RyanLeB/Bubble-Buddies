@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6237309546376904628, guid: 7a4777ffb499c5744aae45bce4e525ef, type: 3}
       propertyPath: m_Name
-      value: BubbleMainMenu
+      value: PinkBubble
       objectReference: {fileID: 0}
     - target: {fileID: 8840291774067543417, guid: 7a4777ffb499c5744aae45bce4e525ef, type: 3}
       propertyPath: m_Size.x
@@ -79,7 +79,7 @@ PrefabInstance:
     - target: {fileID: 8840291774067543417, guid: 7a4777ffb499c5744aae45bce4e525ef, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f1d5a058ddf0f84428d9eb36bb237d12, type: 3}
+      objectReference: {fileID: 21300000, guid: 239c98aed98927041aa1162c8aefcf77, type: 3}
     - target: {fileID: 8840291774067543417, guid: 7a4777ffb499c5744aae45bce4e525ef, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -94,7 +94,7 @@ PrefabInstance:
       addedObject: {fileID: 8603310577445480586}
     - targetCorrespondingSourceObject: {fileID: 6237309546376904628, guid: 7a4777ffb499c5744aae45bce4e525ef, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -6065725265104549758}
+      addedObject: {fileID: 1838919138654508069}
   m_SourcePrefab: {fileID: 100100000, guid: 7a4777ffb499c5744aae45bce4e525ef, type: 3}
 --- !u!1 &1364835706498766927 stripped
 GameObject:
@@ -128,7 +128,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!95 &-6065725265104549758
+--- !u!95 &1838919138654508069
 Animator:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -138,7 +138,7 @@ Animator:
   m_GameObject: {fileID: 1364835706498766927}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e09e080eca0b3274089e0b89b56cb620, type: 2}
+  m_Controller: {fileID: 9100000, guid: 60b4124ae990c654eaf7be2cb3643947, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
