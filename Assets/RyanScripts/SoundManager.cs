@@ -40,10 +40,10 @@ public class SoundManager : MonoBehaviour
     
     private void Start()
     {
-        
 
-        float savedMusicVolume = PlayerPrefs.GetFloat(MusicVolumeKey, 1f);
-        float savedSFXVolume = PlayerPrefs.GetFloat(SFXVolumeKey, 1f);
+
+        float savedMusicVolume = 0.5f;
+        float savedSFXVolume = 0.5f;
 
         // ---- Set the MUSIC sliders to the saved volume values ----
         if (musicVolumeSlider != null)
