@@ -18,7 +18,14 @@ public class BubbleHorde : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        if (player == null)
+        {
+            Debug.LogError("Player object not found. Ensure the player has the 'Player' tag.");
+            enabled = false; 
+            return;
+        }
+
         rb = GetComponent<Rigidbody2D>();
         if (rb == null)
         {
@@ -26,9 +33,9 @@ public class BubbleHorde : MonoBehaviour
         }
         rb.isKinematic = false;
         rb.freezeRotation = true;
-        rb.interpolation = RigidbodyInterpolation2D.Interpolate; 
-        rb.angularDrag = 5f; 
-        rb.drag = 2f; 
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+        rb.angularDrag = 5f;
+        rb.drag = 2f;
 
         Collider2D collider = GetComponent<Collider2D>();
         if (collider == null)
@@ -37,8 +44,8 @@ public class BubbleHorde : MonoBehaviour
         }
 
         PhysicsMaterial2D material = new PhysicsMaterial2D();
-        material.bounciness = 0.1f; 
-        material.friction = 0.1f; 
+        material.bounciness = 0.1f;
+        material.friction = 0.1f;
         collider.sharedMaterial = material;
 
         originalScale = transform.localScale;
@@ -46,6 +53,8 @@ public class BubbleHorde : MonoBehaviour
 
     void Update()
     {
+        if (player == null) return;
+
         Vector2 direction = (player.position - transform.position).normalized;
         rb.AddForce(direction * attractionSpeed);
 

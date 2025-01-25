@@ -3,7 +3,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 2f;
-    public float inertia = 0.98f; 
+    public float floatSpeed = 5f; 
+    public float gravity = 2f; 
     private Rigidbody2D rb;
 
     void Start()
@@ -13,17 +14,16 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveY = Input.GetAxis("Vertical");
+        
+        rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
 
-        if (moveX != 0 || moveY != 0)
+        
+        rb.velocity += Vector2.down * gravity * Time.deltaTime;
+
+        
+        if (Input.GetKey(KeyCode.Space))
         {
-            Vector2 inputDirection = new Vector2(moveX, moveY).normalized;
-            rb.velocity = inputDirection * moveSpeed;
-        }
-        else
-        {
-            rb.velocity *= inertia;
+            rb.velocity = new Vector2(rb.velocity.x, floatSpeed);
         }
     }
 }
