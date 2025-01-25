@@ -13,6 +13,7 @@ public class GameplayTracker : MonoBehaviour
     [SerializeField] private GameObject endPoint;//end point of the level
     [SerializeField] private GameObject player;//player object
     [SerializeField] private TextMeshProUGUI scoreText;//score text
+    [SerializeField] private GameObject[] bubbleBuddy;//bubble buddy prefab
     [Header("Obstacle values")]
     [SerializeField] private float obstacleSpeed;//speed of the obstacles
     [Header("Checkpoint values")]
@@ -22,6 +23,8 @@ public class GameplayTracker : MonoBehaviour
 
     private void Start()
     {
+        FindCheckpoints();
+
         if (startPoint != null && endPoint != null)
         {
             totalDistance = Vector3.Distance(startPoint.transform.position, endPoint.transform.position);
@@ -31,6 +34,7 @@ public class GameplayTracker : MonoBehaviour
     private void Update()
     {
         TrackPlayerDistance();
+        FindBubbleBuddies();
     }
     /// <summary>
     /// Track the player distance
@@ -42,15 +46,43 @@ public class GameplayTracker : MonoBehaviour
             float distanceTraveled = Vector3.Distance(startPoint.transform.position, player.transform.position);
             float progress = distanceTraveled / totalDistance;
             currentScore = Mathf.RoundToInt(progress * 100);//Convert to percentage
-            AddScore(1);
+
+            // Add points based on the number of bubble buddies
+            int bubbleBuddyBonus = bubbleBuddy.Length * 5; // each bubble buddy gives 5 points
+            currentScore += bubbleBuddyBonus;
+
+            AddScore(currentScore);
         }
+    }
+    /// <summary>
+    /// Find the Bubble Buddies
+    /// </summary>
+    public void FindBubbleBuddies()
+    {
+        bubbleBuddy = GameObject.FindGameObjectsWithTag("Bubble");
     }
     /// <summary>
     /// Add score
     /// </summary>
     public void AddScore(int score)
     {
-        currentScore += score;
+        // currentScore += score;
         scoreText.text = "Score: " + currentScore;
+    }
+    /// <summary>
+    /// Find the Checkpoints
+    /// </summary>
+    public void FindCheckpoints()
+    {
+        GameObject[] checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+        checkpointCount = checkpoints.Length;
+    }
+    /// <summary>
+    /// Update the checkpoint count and add bonus score
+    /// </summary>
+    public void CheckpointReached()
+    {
+        checkpointCount--;
+        AddScore(10);
     }
 }

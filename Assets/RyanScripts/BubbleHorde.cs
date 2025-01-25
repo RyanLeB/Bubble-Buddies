@@ -18,6 +18,7 @@ public class BubbleHorde : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = GetComponent<Rigidbody2D>();
         if (rb == null)
         {
