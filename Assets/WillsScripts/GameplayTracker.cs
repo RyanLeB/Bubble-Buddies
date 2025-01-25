@@ -14,8 +14,10 @@ public class GameplayTracker : MonoBehaviour
     [SerializeField] private GameObject player;//player object
     [SerializeField] private TextMeshProUGUI scoreText;//score text
     [SerializeField] private GameObject[] bubbleBuddy;//bubble buddy prefab
+    public int bubblesSaved;//bubbles saved
     [Header("Obstacle values")]
     [SerializeField] private float obstacleSpeed;//speed of the obstacles
+    [SerializeField] private Obstacle[] obstacles;//obstacles
     [Header("Checkpoint values")]
     [SerializeField] private int checkpointCount;//number of checkpoints
 
@@ -35,6 +37,7 @@ public class GameplayTracker : MonoBehaviour
     {
         TrackPlayerDistance();
         FindBubbleBuddies();
+        //BubbleTracker();
     }
     /// <summary>
     /// Track the player distance
@@ -46,7 +49,6 @@ public class GameplayTracker : MonoBehaviour
             float distanceTraveled = Vector3.Distance(startPoint.transform.position, player.transform.position);
             float progress = distanceTraveled / totalDistance;
             currentScore = Mathf.RoundToInt(progress * 100);//Convert to percentage
-
             // Add points based on the number of bubble buddies
             int bubbleBuddyBonus = bubbleBuddy.Length * 5; // each bubble buddy gives 5 points
             currentScore += bubbleBuddyBonus;
@@ -83,6 +85,34 @@ public class GameplayTracker : MonoBehaviour
     public void CheckpointReached()
     {
         checkpointCount--;
+        FindObstacles();
         AddScore(10);
+    }
+    /// <summary>
+    /// Bubble Tracker for final score
+    /// </summary>
+    public void BubbleTracker()
+    {
+        foreach (GameObject bubble in bubbleBuddy)
+        {
+            if (bubble != null)
+            {
+                bubblesSaved++;
+            }
+        }
+    }
+    /// <summary>
+    /// Find all the obstacles in the scene
+    /// </summary>
+    public void FindObstacles()
+    {
+        obstacles = FindObjectsOfType<Obstacle>();
+        foreach (Obstacle obstacle in obstacles)
+        {
+            if (obstacle != null)
+            {  
+                obstacle.speed += obstacleSpeed;
+            }
+        }
     }
 }
