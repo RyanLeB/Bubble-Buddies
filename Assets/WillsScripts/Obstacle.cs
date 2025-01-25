@@ -39,14 +39,16 @@ public class Obstacle : MonoBehaviour
         }
     }
     
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player"))
         {
+            Debug.Log("Player collided with obstacle");
             Destroy(other.gameObject);
         }
         else if(other.CompareTag("Bubble"))
         {
+            Debug.Log("Bubble collided with obstacle");
             Destroy(other.gameObject);
         }
     }
