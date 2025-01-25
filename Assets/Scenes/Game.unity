@@ -343,6 +343,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bubble
       objectReference: {fileID: 0}
+    - target: {fileID: 4341397831820883509, guid: d1b9b400c423b164683128e9c04eda05, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5421709406129493250, guid: d1b9b400c423b164683128e9c04eda05, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3.49

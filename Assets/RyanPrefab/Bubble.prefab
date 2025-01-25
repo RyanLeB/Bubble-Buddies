@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  attractionSpeed: 2
+  attractionSpeed: 15
   squishFactor: 0.9
   squishDuration: 0.5
   squishCooldown: 1

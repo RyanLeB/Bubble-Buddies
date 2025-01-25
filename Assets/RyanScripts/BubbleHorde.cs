@@ -5,7 +5,7 @@ using System.Collections;
 public class BubbleHorde : MonoBehaviour
 {
     public Transform player;
-    public float attractionSpeed = 2f;
+    public float attractionSpeed = 15f;
     public float squishFactor = 0.9f;
     public float squishDuration = 0.5f;
     public float squishCooldown = 1f;
