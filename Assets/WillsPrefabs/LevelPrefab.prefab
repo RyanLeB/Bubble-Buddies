@@ -283,6 +283,8 @@ MonoBehaviour:
   gamePlayTracker: {fileID: 0}
   bubbleBuddyBonus: 20
   checkpointText: {fileID: 3043341389681042017}
+  obstacles: []
+  spawnRadius: 1
 --- !u!1 &2560091618488695826
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,6 +471,8 @@ MonoBehaviour:
   gamePlayTracker: {fileID: 0}
   bubbleBuddyBonus: 15
   checkpointText: {fileID: 3043341389681042017}
+  obstacles: []
+  spawnRadius: 1
 --- !u!1 &3027826365391173246
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,7 +832,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7763994411726813995
 Transform:
   m_ObjectHideFlags: 0
@@ -851,7 +855,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4378529249153761827}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f1cf5ea280a3aaa4c9172aaa16638ac2, type: 3}
   m_Name: 
@@ -1337,3 +1341,5 @@ MonoBehaviour:
   gamePlayTracker: {fileID: 0}
   bubbleBuddyBonus: 20
   checkpointText: {fileID: 3043341389681042017}
+  obstacles: []
+  spawnRadius: 1
