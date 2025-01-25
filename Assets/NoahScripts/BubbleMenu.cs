@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 
@@ -6,24 +7,32 @@ public class BubbleSpawner : MonoBehaviour
     /* This script spawns bubbles at random positions within the camera's view, and allows the player to pop them by clicking on them.
     Main Menu interaction to use this script*/ 
     
-    public GameObject bubblePrefab; // Prefab for the bubble
+    public List<GameObject> bubblePrefabs; // Prefab for the bubble
     public int maxBubbles = 10; // Maximum number of bubbles on screen
     public float bubbleSpeed = 5f; // Speed of the bubbles
+    public float popInDuration = 0.5f; // Radius for popping bubbles
+    public float scaleBubble = 0.5f; // Scale of the bubble
 
     private List<GameObject> bubbles = new List<GameObject>(); // List to store all bubbles
     private Camera mainCamera;
     
+    public List<Sprite> faceSprites; // List of face sprites
+    
     // Sound effects
     public AudioClip popSound; // Sound effect for popping bubbles
+    
+    // Particles
+    public GameObject popParticles; // Particle effect for popping bubbles
+    public GameObject spawnParticles; // Particle effect for spawning bubbles
 
     void Start()
     {
         mainCamera = Camera.main;
-
+        
         // Spawn initial bubbles
         for (int i = 0; i < maxBubbles; i++)
         {
-            SpawnBubble();
+            StartCoroutine(SpawnBubble());
         }
     }
 
@@ -45,10 +54,38 @@ public class BubbleSpawner : MonoBehaviour
         }
     }
 
-    void SpawnBubble() // Spawn a new bubble at a random position
+    private IEnumerator SpawnBubble() // Spawn a new bubble at a random position
     {
         Vector2 spawnPosition = GetRandomPositionWithinCamera();
-        GameObject newBubble = Instantiate(bubblePrefab, spawnPosition, Quaternion.identity);
+        GameObject newBubble = Instantiate(bubblePrefabs[Random.Range(0, bubblePrefabs.Count)], spawnPosition, Quaternion.identity);
+
+        // Set face sprite for the bubble making a child object
+        GameObject face = new GameObject("Face");
+        face.transform.SetParent(newBubble.transform);
+        face.transform.localPosition = Vector3.zero;
+        SpriteRenderer faceRenderer = face.AddComponent<SpriteRenderer>();
+        if (faceRenderer != null && faceSprites.Count > 0)
+        {
+            faceRenderer.sprite = faceSprites[Random.Range(0, faceSprites.Count)];
+            faceRenderer.sortingOrder = faceRenderer.sortingOrder + 1; // Ensure face is rendered above the bubble
+        }
+
+        // Scale the bubble to zero
+        newBubble.transform.localScale = Vector3.zero;
+        face.transform.localScale = Vector3.zero;
+
+        // Scale in the bubble
+        float timer = 0f;
+        while (timer < popInDuration)
+        {
+            newBubble.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * scaleBubble, timer / popInDuration);
+            face.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one * 1.5f, timer / popInDuration);
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        newBubble.transform.localScale = Vector3.one * scaleBubble;
+        face.transform.localScale = Vector3.one * 1.5f;
 
         // Assign random direction and velocity
         Rigidbody2D rb = newBubble.GetComponent<Rigidbody2D>();
@@ -59,22 +96,28 @@ public class BubbleSpawner : MonoBehaviour
         }
 
         bubbles.Add(newBubble);
+        spawnParticles.transform.position = spawnPosition;
     }
 
     void DestroyBubble(GameObject bubble) // Destroy a bubble and spawn a new one, using mouse click
     {
+        Animator animator = bubble.GetComponent<Animator>();
+        if (animator != null)
+        {
+            animator.SetTrigger("Pop"); // Assuming the animation has a trigger parameter named "Pop"
+        }
+
+        // Remove the bubble from the list and destroy it immediately
         bubbles.Remove(bubble);
-        Destroy(bubble);
-        
+        Destroy(bubble, 0.25f); // Small delay to ensure the animation starts
+
         if (popSound != null)
         {
             AudioSource.PlayClipAtPoint(popSound, Camera.main.transform.position);
         }
-        
-        // Particle effect or other visual feedback can be added here
 
         // Spawn a new bubble
-        SpawnBubble();
+        StartCoroutine(SpawnBubble());
     }
 
     Vector2 GetRandomPositionWithinCamera() // Get a random position within the camera's view
@@ -97,6 +140,21 @@ public class BubbleSpawner : MonoBehaviour
             {
                 Vector3 position = bubble.transform.position;
                 Vector3 viewportPosition = mainCamera.WorldToViewportPoint(position);
+                
+                // Sprite Flip for bubbles
+                SpriteRenderer spriteRenderer = bubble.GetComponent<SpriteRenderer>();
+                SpriteRenderer faceRenderer = bubble.transform.Find("Face")?.GetComponent<SpriteRenderer>();
+                
+                if (rb.velocity.x > 0)
+                {
+                    spriteRenderer.flipX = false;
+                    faceRenderer.flipX = false;
+                }
+                else
+                {
+                    spriteRenderer.flipX = true;
+                    faceRenderer.flipX = true;
+                }
 
                 // Bounce off screen edges and reposition if outside
                 if (viewportPosition.x < 0f || viewportPosition.x > 1f)

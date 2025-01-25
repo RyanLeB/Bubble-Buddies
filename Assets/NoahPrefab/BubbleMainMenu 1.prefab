@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6237309546376904628, guid: 7a4777ffb499c5744aae45bce4e525ef, type: 3}
       propertyPath: m_Name
-      value: BubbleMainMenu
+      value: BubbleMainMenu 1
       objectReference: {fileID: 0}
     - target: {fileID: 8840291774067543417, guid: 7a4777ffb499c5744aae45bce4e525ef, type: 3}
       propertyPath: m_Size.x
@@ -79,7 +79,7 @@ PrefabInstance:
     - target: {fileID: 8840291774067543417, guid: 7a4777ffb499c5744aae45bce4e525ef, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: f1d5a058ddf0f84428d9eb36bb237d12, type: 3}
+      objectReference: {fileID: 21300000, guid: 67cecfd18ecd0e442b560dda64506d43, type: 3}
     - target: {fileID: 8840291774067543417, guid: 7a4777ffb499c5744aae45bce4e525ef, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
@@ -138,7 +138,7 @@ Animator:
   m_GameObject: {fileID: 1364835706498766927}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e09e080eca0b3274089e0b89b56cb620, type: 2}
+  m_Controller: {fileID: 9100000, guid: 15cc11d8d5cbf574f811159cd27126bd, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
