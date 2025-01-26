@@ -37,7 +37,7 @@ public class StationairyObstacleSpawner : MonoBehaviour
     void GenerateObstacle()
     {
         int randomObstacle = Random.Range(0, obstaclesPrefabs.Length);
-        Vector3 spawnPosition = new Vector3(Random.Range(spawnArea.x, spawnArea.x + spawnArea.width), Random.Range(spawnArea.y, spawnArea.y + spawnArea.height), 0);
+        Vector3 spawnPosition = transform.position + new Vector3(Random.Range(spawnArea.x, spawnArea.x + spawnArea.width), Random.Range(spawnArea.y, spawnArea.y + spawnArea.height), 0);
         GameObject obstacle = Instantiate(obstaclesPrefabs[randomObstacle], spawnPosition, Quaternion.identity);
         currentObstacleCount++;
         Debug.Log("Obstacle spawned at " + spawnPosition);
@@ -46,6 +46,6 @@ public class StationairyObstacleSpawner : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(new Vector3(spawnArea.x + spawnArea.width / 2, spawnArea.y + spawnArea.height / 2, 0), new Vector3(spawnArea.width, spawnArea.height, 0));
+        Gizmos.DrawWireCube(transform.position + new Vector3(spawnArea.x + spawnArea.width / 2, spawnArea.y + spawnArea.height / 2, 0), new Vector3(spawnArea.width, spawnArea.height, 0));
     }
 }
