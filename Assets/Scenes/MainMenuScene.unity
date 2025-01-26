@@ -753,6 +753,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0342fd4a0a2ff049bd1751db01fdbbd, type: 3}
+--- !u!1 &184969093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 184969094}
+  m_Layer: 0
+  m_Name: PropSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &184969094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184969093}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 758.4, y: -109, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1485935685}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &241764905
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,6 +1172,61 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 922ddd4bf33922846b4ab6d40eb16db8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &262321641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 262321642}
+  - component: {fileID: 262321643}
+  m_Layer: 0
+  m_Name: RandomPropGenerator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &262321642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262321641}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 537.3, y: -161, z: -2143.225}
+  m_LocalScale: {x: 26.272226, y: 26.272226, z: 26.272226}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 279247874}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &262321643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 262321641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 524c0b1ab3c26bd428ab08da2343627e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  propsPrefabs:
+  - {fileID: 632622340045978094, guid: efd4c03af77eae141b5b292ffc713f6d, type: 3}
+  - {fileID: 7067948807612812391, guid: f7de950defdf10542b6df43f158410f0, type: 3}
+  - {fileID: 1231489526170904084, guid: 5ef608057e935fd4dbff83c4b99d1b9c, type: 3}
+  - {fileID: 4938688103812933564, guid: 872c89abc62d0cc4b89a4170c4106bf9, type: 3}
+  - {fileID: 472446025735560870, guid: d5090ae0851b96a428b6ec9d4cfbd477, type: 3}
+  - {fileID: 8689616258813658066, guid: 8cdd9663f99457c419a901579cce1361, type: 3}
+  - {fileID: 3903553448258678235, guid: 4e0ca3c058840cd43ae9bae9a8cd80b2, type: 3}
+  spawnPoint: {fileID: 184969094}
+  timeBetweenProps: 3
+  isSpawned: 0
 --- !u!1 &263726182
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,7 +1274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &279247874
 Transform:
   m_ObjectHideFlags: 0
@@ -1208,6 +1294,7 @@ Transform:
   - {fileID: 717791610}
   - {fileID: 1485935685}
   - {fileID: 634458216}
+  - {fileID: 262321642}
   m_Father: {fileID: 745092089}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &356946181
@@ -6001,7 +6088,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 184969094}
   m_Father: {fileID: 279247874}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -7214,7 +7302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1853508207
 Transform:
   m_ObjectHideFlags: 0
@@ -7707,8 +7795,8 @@ MonoBehaviour:
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: daa3c7ffe35797f4eacae7f62596fa4e, type: 3}
-    m_PressedSprite: {fileID: 21300000, guid: 7642f3ddec9b07746a8a902dff3c472a, type: 3}
+    m_HighlightedSprite: {fileID: 21300000, guid: 80dabc04813637a4ba5aff46de92e422, type: 3}
+    m_PressedSprite: {fileID: 21300000, guid: f67423f545db3b242a361ba1790258ba, type: 3}
     m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
@@ -7722,34 +7810,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 254906025}
-        m_TargetAssemblyTypeName: GameManage, Assembly-CSharp
-        m_MethodName: PauseGame
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 859343124}
         m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: MainMenu
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 649902228}
-        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
-        m_MethodName: SetUI
-        m_Mode: 5
+        m_MethodName: QuitGame
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7778,7 +7842,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ac091c9e42d91534ab67a42b7cecf07a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4a10bdbf0c467db48bb4dc05e4388ac0, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1

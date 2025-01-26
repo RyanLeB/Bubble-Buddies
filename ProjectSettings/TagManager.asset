@@ -10,6 +10,8 @@ TagManager:
   - StartPoint
   - WinTrig
   - LevelTransition
+  - Debris
+  - Coral
   layers:
   - Default
   - TransparentFX
