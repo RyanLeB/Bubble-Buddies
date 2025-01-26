@@ -92,6 +92,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubbleBuddy: {fileID: 4341397831820883509, guid: d1b9b400c423b164683128e9c04eda05, type: 3}
   gamePlayTracker: {fileID: 0}
+  bubbleBuddyBonus: 0
+  checkpointText: {fileID: 0}
+  obstacles: []
+  spawnRadius: 1
 --- !u!1 &1384794411425142636
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,6 +188,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubbleBuddy: {fileID: 4341397831820883509, guid: d1b9b400c423b164683128e9c04eda05, type: 3}
   gamePlayTracker: {fileID: 0}
+  bubbleBuddyBonus: 0
+  checkpointText: {fileID: 0}
+  obstacles: []
+  spawnRadius: 1
 --- !u!1 &2737330856023344821
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,6 +420,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubbleBuddy: {fileID: 4341397831820883509, guid: d1b9b400c423b164683128e9c04eda05, type: 3}
   gamePlayTracker: {fileID: 0}
+  bubbleBuddyBonus: 0
+  checkpointText: {fileID: 0}
+  obstacles: []
+  spawnRadius: 1
 --- !u!1 &3822728118730618035
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,6 +593,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubbleBuddy: {fileID: 4341397831820883509, guid: d1b9b400c423b164683128e9c04eda05, type: 3}
   gamePlayTracker: {fileID: 0}
+  bubbleBuddyBonus: 0
+  checkpointText: {fileID: 0}
+  obstacles: []
+  spawnRadius: 1
 --- !u!1 &4540313809183953632
 GameObject:
   m_ObjectHideFlags: 0
@@ -1107,6 +1123,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubbleBuddy: {fileID: 4341397831820883509, guid: d1b9b400c423b164683128e9c04eda05, type: 3}
   gamePlayTracker: {fileID: 0}
+  bubbleBuddyBonus: 0
+  checkpointText: {fileID: 0}
+  obstacles: []
+  spawnRadius: 1
 --- !u!1 &7513646041503591806
 GameObject:
   m_ObjectHideFlags: 0
