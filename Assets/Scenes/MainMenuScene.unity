@@ -3923,7 +3923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4779,12 +4779,16 @@ PrefabInstance:
       value: -25
       objectReference: {fileID: 0}
     - target: {fileID: 7490287040525547377, guid: 040d115610a9b184db8b1fed8174f3a3, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7490287040525547377, guid: 040d115610a9b184db8b1fed8174f3a3, type: 3}
       propertyPath: m_SortingLayer
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7490287040525547377, guid: 040d115610a9b184db8b1fed8174f3a3, type: 3}
       propertyPath: m_SortingOrder
-      value: -6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7490287040525547377, guid: 040d115610a9b184db8b1fed8174f3a3, type: 3}
       propertyPath: m_SortingLayerID
