@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
+    public enum ObstacleType//obstacle type
+    {
+        Moving,
+        Static
+    }
+    public ObstacleType obstacleType;//obstacle type
     public float speed = 5f;//speed of the obstacle
     [SerializeField] Camera mainCamera;//main camera
-    [SerializeField] private float destroyOffset = 1f;//offset to destroy the obstacle
+    [SerializeField] private float destroyOffset = 5f;//offset to destroy the obstacle
     void Start()
     {
         mainCamera = Camera.main;
@@ -21,7 +27,14 @@ public class Obstacle : MonoBehaviour
     /// </summary>
     void MoveObstacle()
     {
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        if(obstacleType == ObstacleType.Moving)
+        {
+            transform.Translate(Vector3.left * speed * Time.deltaTime);
+        }
+        else if(obstacleType == ObstacleType.Static)
+        {
+            return;
+        }
     }
     /// <summary>
     /// Destroy the obstacle when it leaves the camera view
