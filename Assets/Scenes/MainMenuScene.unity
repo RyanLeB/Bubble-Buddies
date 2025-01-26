@@ -7917,6 +7917,7 @@ MonoBehaviour:
   obstacles: []
   checkpointCount: 0
   gameMange: {fileID: 0}
+  levelManager: {fileID: 859343124}
 --- !u!1 &2066831959
 GameObject:
   m_ObjectHideFlags: 0

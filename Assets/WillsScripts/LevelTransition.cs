@@ -16,6 +16,7 @@ public class LevelTransition : MonoBehaviour
 
     void Start()
     {
+        ReloadLevel();
         Debug.Log("Starting level transition");
         levelIndex = 0;
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
@@ -66,5 +67,14 @@ public class LevelTransition : MonoBehaviour
     {
         LevelPrefab.Add(LevelPrefab[levelIndex]);
         return LevelPrefab[levelIndex];
+    }
+    void ReloadLevel()
+    {
+        Debug.Log("Reloading level");
+        levelIndex = 0;
+        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        Vector3 spawnPosition = playerTransform.position + playerTransform.forward * distanceInFrontOfPlayer;
+        currentLevelSegment = Instantiate(LevelPrefab[levelIndex], spawnPosition, Quaternion.identity);
+        spawnedLevelCount++;
     }
 }
