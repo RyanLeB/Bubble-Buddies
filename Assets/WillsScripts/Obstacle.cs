@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Obstacle : MonoBehaviour
 {
-    public enum ObstacleType//obstacle type
+    public enum ObstacleType //obstacle type
     {
         Moving,
         Static
     }
-    public ObstacleType obstacleType;//obstacle type
-    public float speed = 5f;//speed of the obstacle
-    [SerializeField] Camera mainCamera;//main camera
-    [SerializeField] private float destroyOffset = 10f;//offset to destroy the obstacle
+    public ObstacleType obstacleType; //obstacle type
+    public float speed = 5f; //speed of the obstacle
+    [SerializeField] Camera mainCamera; //main camera
+    [SerializeField] private float destroyOffset = 20f; //offset to destroy the obstacle
     void Start()
     {
         mainCamera = Camera.main;
@@ -27,7 +27,7 @@ public class Obstacle : MonoBehaviour
     /// </summary>
     void MoveObstacle()
     {
-        if(obstacleType == ObstacleType.Moving)
+        if (obstacleType == ObstacleType.Moving)
         {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
         }
@@ -38,20 +38,20 @@ public class Obstacle : MonoBehaviour
     /// </summary>
     void DestroyWhenOffScreen()
     {
-        if(mainCamera == null)
+        if (mainCamera == null)
         {
             return;
         }
         Vector3 screenPoint = mainCamera.WorldToViewportPoint(transform.position);
-        if(screenPoint.x < destroyOffset)
+        if (screenPoint.x < -destroyOffset)
         {
             Destroy(gameObject);
         }
     }
-    
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.CompareTag("Bubble"))
+        if (other.CompareTag("Bubble"))
         {
             Debug.Log("Bubble collided with obstacle");
             Destroy(other.gameObject);

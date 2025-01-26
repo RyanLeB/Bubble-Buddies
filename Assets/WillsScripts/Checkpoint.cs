@@ -17,6 +17,10 @@ public class Checkpoint : MonoBehaviour
         checkpointText.text = "";
         FindObstacles();
     }
+    void Update()
+    {
+        FindObstacles();
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -55,7 +59,8 @@ public class Checkpoint : MonoBehaviour
 
             foreach (var obstacle in obstacles)
             {
-                if (Vector3.Distance(spawnPosition, obstacle.transform.position) < obstacle.GetComponent<Collider2D>().bounds.extents.magnitude)
+                Collider2D obstacleCollider = obstacle.GetComponent<Collider2D>();
+                if (obstacleCollider != null && Vector3.Distance(spawnPosition, obstacle.transform.position) < obstacleCollider.bounds.extents.magnitude)
                 {
                     validPosition = false;
                     break;
@@ -71,10 +76,7 @@ public class Checkpoint : MonoBehaviour
     /// </summary>
     void FindObstacles()
     {
-        if(obstacles.Length == 0)
-        {
-            obstacles = FindObjectsOfType<Obstacle>();
-        }
+        obstacles = FindObjectsOfType<Obstacle>();
     }
 
     /// <summary>
