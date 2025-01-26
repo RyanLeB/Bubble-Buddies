@@ -23,7 +23,7 @@ public class GameplayTracker : MonoBehaviour
     [SerializeField] private int checkpointCount;//number of checkpoints
     [Header("Class calls")]
     [SerializeField] private GameManage gameMange;//game manager
-
+    [SerializeField] private LevelManager levelManager;//level manager
     private float totalDistance;
     private float pointsPerSecond = 0.1f; // Points added per second
     private float waveFrequency = 2f; // Frequency of the wave effect
@@ -51,7 +51,7 @@ public class GameplayTracker : MonoBehaviour
     private void Update()
     {
         FindBubbleBuddies();
-        if(gameMange.isPaused == false)
+        if(gameMange.isPaused == false && levelManager.scenename == "Game")
         {
             AddScorePerSecond();   
         }
@@ -79,11 +79,11 @@ public class GameplayTracker : MonoBehaviour
     /// <summary>
     /// Add score
     /// </summary>
-    public void AddScore(float score)
-    {
-        currentScore += score;
-        UpdateScoreText();
-    }
+    // public void AddScore(float score)
+    // {
+    //     currentScore += score;
+    //     UpdateScoreText();
+    // }
     /// <summary>
     /// Update the score text with wave and rainbow effect
     /// </summary>
