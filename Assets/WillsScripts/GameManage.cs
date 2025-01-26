@@ -8,7 +8,7 @@ public class GameManage : MonoBehaviour
     [SerializeField] private GameStateManager gameStateManager;//game state manager
     [SerializeField] private LevelManager levelManager;//level manager
     [SerializeField] private Singleton singleton;//singleton
-    [SerializeField] private UIManager uiManager;//UI manager
+    [SerializeField] public UIManager uiManager;//UI manager
     [SerializeField] private GameObject player;//player game object
     public SoundManager soundManager;//sound manager
     [Header("Variables")]

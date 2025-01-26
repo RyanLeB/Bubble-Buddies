@@ -29,7 +29,10 @@ public class GameplayTracker : MonoBehaviour
     private float waveFrequency = 2f; // Frequency of the wave effect
     private float waveAmplitude = 5f; // Amplitude of the wave effect
     private float rainbowSpeed = 2f; // Speed of the rainbow effect
-
+    private int previousBubbleBuddyCount; // Previous bubble buddy count
+    private Coroutine gameOverCoroutine;
+    private Coroutine delayedBubbleBuddyCheckCoroutine;
+    
     private void Start()
     {
         gameMange = FindObjectOfType<GameManage>();
@@ -46,6 +49,8 @@ public class GameplayTracker : MonoBehaviour
         {
             totalDistance = Vector3.Distance(startPoint.transform.position, endPoint.transform.position);
         }
+        previousBubbleBuddyCount = bubbleBuddy.Length;
+        StartCoroutine(DelayedBubbleBuddyCheck());
     }
 
     private void Update()
@@ -73,7 +78,24 @@ public class GameplayTracker : MonoBehaviour
     /// </summary>
     public void FindBubbleBuddies()
     {
+        int currentBubbleBuddyCount = GameObject.FindGameObjectsWithTag("Bubble").Length;
+        if (currentBubbleBuddyCount < previousBubbleBuddyCount)
+        {
+            gameMange.soundManager.PlaySFX("BubblePop4");
+        }
+        if (currentBubbleBuddyCount == 0 && gameOverCoroutine == null && levelManager.scenename == "Game")
+        {
+            gameOverCoroutine = StartCoroutine(GameOverDelay());
+        }
+        else if (currentBubbleBuddyCount > 0 && gameOverCoroutine != null)
+        {
+            StopCoroutine(gameOverCoroutine);
+            gameOverCoroutine = null;
+        }
+        previousBubbleBuddyCount = currentBubbleBuddyCount;
         bubbleBuddy = GameObject.FindGameObjectsWithTag("Bubble");
+      
+        
     }
 
     /// <summary>
@@ -100,6 +122,8 @@ public class GameplayTracker : MonoBehaviour
             bubbleText.text = "";
         }
 
+        
+        
         scoreText.text = scoreString;
     }
 
@@ -125,7 +149,10 @@ public class GameplayTracker : MonoBehaviour
     /// </summary>
     private void AddScorePerSecond()
     {
-        currentScore += pointsPerSecond;
+        if (bubbleBuddy.Length > 0) // Check if there are any bubble buddies left
+        {
+            currentScore += pointsPerSecond;
+        }
         UpdateScoreText();
     }
     /// <summary>
@@ -153,6 +180,7 @@ public class GameplayTracker : MonoBehaviour
             if (bubble != null)
             {
                 bubblesSaved++;
+                gameMange.soundManager.PlaySFX("Select");
             }
         }
     }
@@ -169,5 +197,51 @@ public class GameplayTracker : MonoBehaviour
                 obstacle.speed += obstacleSpeed;
             }
         }
+    }
+    
+    private IEnumerator GameOverDelay()
+    {
+        yield return new WaitForSeconds(2f); // Wait for 2 seconds
+        if (GameObject.FindGameObjectsWithTag("Bubble").Length == 0)
+        {
+            ShowFinalScoreAndRestart();
+        }
+    }
+    
+    private IEnumerator DelayedBubbleBuddyCheck()
+    {
+        yield return new WaitForSeconds(5f); // Wait for 5 seconds before starting the check
+        while (true)
+        {
+            FindBubbleBuddies();
+            yield return new WaitForSeconds(1f); // Check every 1 second
+        }
+    }
+    
+    
+    public void ShowFinalScoreAndRestart()
+    {
+        // Stop the delayed bubble buddy check coroutine
+        if (delayedBubbleBuddyCheckCoroutine != null)
+        {
+            StopCoroutine(delayedBubbleBuddyCheckCoroutine);
+            delayedBubbleBuddyCheckCoroutine = null;
+        }
+
+        // Show the final score on the canvas
+        gameMange.uiManager.SetUI("GameOver");
+        Debug.Log("Game Over");
+        TextMeshProUGUI finalScoreText = GameObject.Find("FinalScoreText").GetComponent<TextMeshProUGUI>();
+        finalScoreText.text = "Final Score: " + currentScore.ToString("F2");
+
+        // Restart the application after a delay
+        StartCoroutine(RestartApplication());
+    }
+    
+    private IEnumerator RestartApplication()
+    {
+        yield return new WaitForSeconds(3f); // Wait for 3 seconds
+        System.Diagnostics.Process.Start(Application.dataPath.Replace("_Data", ".exe")); // Start a new instance of the application
+        Application.Quit();
     }
 }

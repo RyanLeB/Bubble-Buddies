@@ -27,6 +27,7 @@ public class ObstacleGenerator : MonoBehaviour
     {
         int randomObstacle = Random.Range(0, obstaclesPrefabs.Length);
         GameObject obstacle = Instantiate(obstaclesPrefabs[randomObstacle], spawnPoint.position, Quaternion.identity);
+        SetTagRecursively(obstacle, "Obstacle");
         isSpawned = false;
         //obstacle.GetComponent<Rigidbody2D>().velocity = new Vector2(-scrollSpeed, 0);
     }
@@ -36,6 +37,15 @@ public class ObstacleGenerator : MonoBehaviour
         {
             isSpawned = true;
             StartCoroutine(StartObstacleGeneration());
+        }
+    }
+    
+    void SetTagRecursively(GameObject obj, string tag)
+    {
+        obj.tag = tag;
+        foreach (Transform child in obj.transform)
+        {
+            SetTagRecursively(child.gameObject, tag);
         }
     }
 }

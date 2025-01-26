@@ -12,6 +12,7 @@ TagManager:
   - LevelTransition
   - Debris
   - Coral
+  - Obstacle
   layers:
   - Default
   - TransparentFX
