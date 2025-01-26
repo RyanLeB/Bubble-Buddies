@@ -7,11 +7,13 @@ public class LevelManager : MonoBehaviour
 {
     public GameManage gameManage;
     public LevelTransition levelTransition;
+    public Camera mainCamera; // Add this for the main camera reference
     
     public string scenename;
     void Start()
     {
         gameManage = FindObjectOfType<GameManage>();
+        mainCamera = Camera.main; // Get the main camera
     }
     void Update()
     {
@@ -32,6 +34,7 @@ public class LevelManager : MonoBehaviour
         {
             case "MainMenu":
                 SceneManager.LoadScene("MainMenuScene");
+                mainCamera.enabled = true;
                 gameManage.soundManager.PlayMusic("BubbleBuddies");
                 break;
             case "Game":
@@ -39,6 +42,10 @@ public class LevelManager : MonoBehaviour
                 //levelTransition.ReloadLevel();
                 break;
             case "Clicker":
+                if (mainCamera != null)
+                {
+                    mainCamera.enabled = false; // Disable the camera
+                }
                 SceneManager.LoadScene("Interaction Main Menu");
                 gameManage.soundManager.PlayMusic("ClickingGame");
                 break;

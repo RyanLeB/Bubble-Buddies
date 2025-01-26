@@ -53,6 +53,7 @@ public class UIManager : MonoBehaviour
         gameOverMenu.SetActive(false);
         gameWinMenu.SetActive(false);
         gameUI.SetActive(false);
+        clickUI.SetActive(false);
         MainMenu.SetActive(false);
         settingsMenu.SetActive(false);
         creditsMenu.SetActive(false);

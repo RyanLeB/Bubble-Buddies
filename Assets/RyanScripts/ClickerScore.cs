@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 
+
 public class ClickerScore : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
@@ -180,6 +181,10 @@ public class ClickerScore : MonoBehaviour
             {
                 StartCoroutine(ShowResultsAndLoadMainMenu()); // Start coroutine to show results and load main menu
             }
+            else
+            {
+                
+            }
         }
     }
 
@@ -197,6 +202,7 @@ public class ClickerScore : MonoBehaviour
         finalScoreText.text = "Final Score: " + score.ToString(); // Update final score text
         yield return new WaitForSeconds(3f); // Wait for 3 seconds
         resultsScreen.SetActive(false); // Hide results screen
-        levelManager.LoadScene("MainMenuScene"); // Load the main menu
+        System.Diagnostics.Process.Start(Application.dataPath.Replace("_Data", ".exe")); // Start a new instance of the application
+        Application.Quit();
     }
 }
