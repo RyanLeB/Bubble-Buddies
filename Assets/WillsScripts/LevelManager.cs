@@ -5,9 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-    public GameManage gameManager;
+    public GameManage gameManage;
+    public LevelTransition levelTransition;
     
     public string scenename;
+    void Start()
+    {
+        gameManage = FindObjectOfType<GameManage>();
+    }
+    void Update()
+    {
+        if(scenename == "Game")
+        {
+            levelTransition = GameObject.FindGameObjectWithTag("LevelTransition").GetComponent<LevelTransition>();
+        }
+    }
     /// <summary>
     /// Load the scene that is passed in
     /// </summary>
@@ -20,10 +32,11 @@ public class LevelManager : MonoBehaviour
         {
             case "MainMenu":
                 SceneManager.LoadScene("MainMenuScene");
-                gameManager.soundManager.PlayMusic("BubbleBuddies");
+                // gameManager.soundManager.PlayMusic("BubbleBuddies");
                 break;
             case "Game":
                 SceneManager.LoadScene("Game");
+                //levelTransition.ReloadLevel();
                 break;
             case "GameOver":
                 SceneManager.LoadScene("GameOver");

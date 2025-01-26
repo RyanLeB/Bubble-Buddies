@@ -1310,18 +1310,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c81aea1b4887d2143b7b6fe237936e35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obstacles:
+  obstaclesPrefabs:
   - {fileID: 4919082954535723696, guid: f459b63004c945041a7c67a211d3819d, type: 3}
   - {fileID: 5205784385032977648, guid: 9ae3b651b4ccd3d4eab2ef21afa9a5ae, type: 3}
+  - {fileID: 4919082954535723696, guid: f459b63004c945041a7c67a211d3819d, type: 3}
+  - {fileID: 5205784385032977648, guid: 9ae3b651b4ccd3d4eab2ef21afa9a5ae, type: 3}
+  - {fileID: 4919082954535723696, guid: f459b63004c945041a7c67a211d3819d, type: 3}
   spawnArea:
     serializedVersion: 2
     x: 40
-    y: -10
+    y: -30
     width: 60
-    height: 20
-  spawnRate: 0
-  canSpawn: 0
-  maxNumObstacles: 0
+    height: 15
+  isSpawned: 0
 --- !u!1 &4087587915215414192
 GameObject:
   m_ObjectHideFlags: 0

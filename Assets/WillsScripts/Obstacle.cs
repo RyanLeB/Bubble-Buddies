@@ -12,7 +12,7 @@ public class Obstacle : MonoBehaviour
     public ObstacleType obstacleType;//obstacle type
     public float speed = 5f;//speed of the obstacle
     [SerializeField] Camera mainCamera;//main camera
-    [SerializeField] private float destroyOffset = 5f;//offset to destroy the obstacle
+    [SerializeField] private float destroyOffset = 10f;//offset to destroy the obstacle
     void Start()
     {
         mainCamera = Camera.main;
@@ -31,10 +31,7 @@ public class Obstacle : MonoBehaviour
         {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
         }
-        else if(obstacleType == ObstacleType.Static)
-        {
-            return;
-        }
+        // No need to move static obstacles
     }
     /// <summary>
     /// Destroy the obstacle when it leaves the camera view

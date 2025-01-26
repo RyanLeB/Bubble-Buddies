@@ -9,6 +9,7 @@ TagManager:
   - Win
   - StartPoint
   - WinTrig
+  - LevelTransition
   layers:
   - Default
   - TransparentFX

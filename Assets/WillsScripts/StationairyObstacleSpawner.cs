@@ -4,29 +4,45 @@ using UnityEngine;
 
 public class StationairyObstacleSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject[] obstacles;//obstacles to spawn
-    [SerializeField] private Rect spawnArea;//area to spawn obstacles
-    [SerializeField] private float spawnRate;//rate to spawn obstacles
-    [SerializeField] private bool canSpawn;//can spawn obstacles
-    [SerializeField] private int maxNumObstacles;//max number of obstacles
+    [SerializeField] private GameObject[] obstaclesPrefabs; // array of obstacles prefabs
+    [SerializeField] private Rect spawnArea; // area to spawn the obstacles
+    [SerializeField] private bool isSpawned; // is the obstacle spawned
+    [SerializeField] private int maxObstacles = 3; // maximum number of obstacles
+    private int currentObstacleCount = 0; // current number of spawned obstacles
 
-    void Start()
+    void Update()
     {
-        StartCoroutine(SpawnObstacles());
-        canSpawn = true;
-    }
-    IEnumerator SpawnObstacles()
-    {
-        while(canSpawn)
+        if (!isSpawned && currentObstacleCount < maxObstacles)
         {
-            if(transform.childCount < maxNumObstacles)
-            {
-                GameObject obstacle = Instantiate(obstacles[Random.Range(0, obstacles.Length)], new Vector3(Random.Range(spawnArea.x, spawnArea.x + spawnArea.width), Random.Range(spawnArea.y, spawnArea.y + spawnArea.height), 0), Quaternion.identity);
-                obstacle.transform.parent = transform;
-            }
-            yield return new WaitForSeconds(spawnRate);
+            isSpawned = true;
+            StartCoroutine(StartObstacleGeneration());
         }
     }
+
+    /// <summary>
+    /// Start the coroutine to generate obstacles
+    /// </summary>
+    /// <returns></returns>
+    public IEnumerator StartObstacleGeneration()
+    {
+        yield return new WaitForSeconds(Random.Range(1, 3));
+        GenerateObstacle();
+        yield return new WaitForSeconds(Random.Range(1, 3));
+        isSpawned = false;
+    }
+
+    /// <summary>
+    /// Generate the obstacles
+    /// </summary>
+    void GenerateObstacle()
+    {
+        int randomObstacle = Random.Range(0, obstaclesPrefabs.Length);
+        Vector3 spawnPosition = new Vector3(Random.Range(spawnArea.x, spawnArea.x + spawnArea.width), Random.Range(spawnArea.y, spawnArea.y + spawnArea.height), 0);
+        GameObject obstacle = Instantiate(obstaclesPrefabs[randomObstacle], spawnPosition, Quaternion.identity);
+        currentObstacleCount++;
+        Debug.Log("Obstacle spawned at " + spawnPosition);
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

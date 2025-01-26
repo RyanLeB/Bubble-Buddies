@@ -126,7 +126,6 @@ public class GameplayTracker : MonoBehaviour
     private void AddScorePerSecond()
     {
         currentScore += pointsPerSecond;
-        Debug.Log("Score: " + currentScore);
         UpdateScoreText();
     }
     /// <summary>
