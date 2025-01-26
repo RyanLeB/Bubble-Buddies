@@ -32,11 +32,15 @@ public class LevelManager : MonoBehaviour
         {
             case "MainMenu":
                 SceneManager.LoadScene("MainMenuScene");
-                // gameManager.soundManager.PlayMusic("BubbleBuddies");
+                gameManage.soundManager.PlayMusic("BubbleBuddies");
                 break;
             case "Game":
                 SceneManager.LoadScene("Game");
                 //levelTransition.ReloadLevel();
+                break;
+            case "Clicker":
+                SceneManager.LoadScene("Interaction Main Menu");
+                gameManage.soundManager.PlayMusic("ClickingGame");
                 break;
             case "GameOver":
                 SceneManager.LoadScene("GameOver");

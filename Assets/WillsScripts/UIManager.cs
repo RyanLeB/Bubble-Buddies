@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject gameOverMenu;//Game over menu object
     [SerializeField] private GameObject gameWinMenu;//Game win menu object
     [SerializeField] private GameObject gameUI;//Game UI object
+    [SerializeField] private GameObject clickUI;//Game UI object
     [SerializeField] private GameObject MainMenu;//Main menu object
     [SerializeField] private GameObject settingsMenu;//Settings menu object
     [SerializeField] private GameObject creditsMenu;//Credits menu object
@@ -79,6 +80,9 @@ public class UIManager : MonoBehaviour
                 break;
             case "GameUI":
                 gameUI.SetActive(true);
+                break;
+            case "ClickUI":
+                clickUI.SetActive(true);
                 break;
             case "MainMenu":
                 MainMenu.SetActive(true);
