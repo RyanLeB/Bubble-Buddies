@@ -57,7 +57,7 @@ public class ClickerScore : MonoBehaviour
 
     private void UpdateComboText()
     {
-        comboText.text = "x" + comboMultiplier.ToString();
+        comboText.text = "Combo: x" + comboMultiplier.ToString();
     }
 
     private void StartPulsing()
