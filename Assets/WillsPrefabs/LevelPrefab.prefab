@@ -1319,10 +1319,11 @@ MonoBehaviour:
   spawnArea:
     serializedVersion: 2
     x: 40
-    y: -30
+    y: -15
     width: 60
-    height: 15
+    height: 10
   isSpawned: 0
+  maxObstacles: 3
 --- !u!1 &4087587915215414192
 GameObject:
   m_ObjectHideFlags: 0

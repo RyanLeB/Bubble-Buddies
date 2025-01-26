@@ -185,7 +185,7 @@ MonoBehaviour:
   obstacleType: 0
   speed: 0
   mainCamera: {fileID: 0}
-  destroyOffset: 10
+  destroyOffset: 0.1
 --- !u!61 &-887258256214033324
 BoxCollider2D:
   m_ObjectHideFlags: 0
