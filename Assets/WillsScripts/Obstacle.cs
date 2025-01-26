@@ -6,7 +6,7 @@ public class Obstacle : MonoBehaviour
 {
     public float speed = 5f;//speed of the obstacle
     [SerializeField] Camera mainCamera;//main camera
-    [SerializeField] private float destroyOffset = 0.5f;//offset to destroy the obstacle
+    [SerializeField] private float destroyOffset = 1f;//offset to destroy the obstacle
     void Start()
     {
         mainCamera = Camera.main;
