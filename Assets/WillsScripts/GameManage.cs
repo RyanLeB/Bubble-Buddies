@@ -9,19 +9,32 @@ public class GameManage : MonoBehaviour
     [SerializeField] private LevelManager levelManager;//level manager
     [SerializeField] private Singleton singleton;//singleton
     [SerializeField] private UIManager uiManager;//UI manager
+    [SerializeField] private GameObject player;//player game object
     public SoundManager soundManager;//sound manager
     [Header("Variables")]
-    [SerializeField] private bool isPaused;//is the game paused
+    public bool isPaused;//is the game paused
 
     // Start is called before the first frame update
     void Start()
     {
         soundManager.PlayMusic("BubbleBuddies");
+        player = GameObject.FindGameObjectWithTag("Player");
         gameStateManager = GameObject.Find("GameStateManager").GetComponent<GameStateManager>();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         singleton = GameObject.Find("Singleton").GetComponent<Singleton>();
         uiManager = GameObject.Find("UIManager").GetComponent<UIManager>();
         soundManager = GameObject.Find("SoundManager").GetComponent<SoundManager>();
+    }
+    void Update()
+    {
+        if(levelManager.scenename == "Game")
+        {
+            player.SetActive(true);
+        }
+        else
+        {
+            player.SetActive(false);
+        }
     }
     /// <summary>
     /// Pause the game and set the UI to the pause menu

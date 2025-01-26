@@ -21,6 +21,8 @@ public class GameplayTracker : MonoBehaviour
     [SerializeField] private Obstacle[] obstacles;//obstacles
     [Header("Checkpoint values")]
     [SerializeField] private int checkpointCount;//number of checkpoints
+    [Header("Class calls")]
+    [SerializeField] private GameManage gameMange;//game manager
 
     private float totalDistance;
     private float pointsPerSecond = 0.1f; // Points added per second
@@ -30,6 +32,7 @@ public class GameplayTracker : MonoBehaviour
 
     private void Start()
     {
+        gameMange = FindObjectOfType<GameManage>();
         FindCheckpoints();
         if(startPoint == null)
         {
@@ -48,7 +51,10 @@ public class GameplayTracker : MonoBehaviour
     private void Update()
     {
         FindBubbleBuddies();
-        AddScorePerSecond();
+        if(gameMange.isPaused == false)
+        {
+            AddScorePerSecond();   
+        }
         UpdateScoreText();
     }
     /// <summary>
@@ -109,7 +115,7 @@ public class GameplayTracker : MonoBehaviour
             float wave = Mathf.Sin(Time.time * waveFrequency + i * 0.5f) * waveAmplitude;
             Color color = Color.HSVToRGB((Time.time * rainbowSpeed + i * 0.1f) % 1f, 1f, 1f);
             string colorHex = ColorUtility.ToHtmlStringRGB(color);
-            result += $"<color=#{colorHex}><size={wave + 30}>{c}</size></color>";
+            result += $"<color=#{colorHex}><size={wave + 50}>{c}</size></color>";
         }
         return result;
     }
@@ -120,6 +126,7 @@ public class GameplayTracker : MonoBehaviour
     private void AddScorePerSecond()
     {
         currentScore += pointsPerSecond;
+        Debug.Log("Score: " + currentScore);
         UpdateScoreText();
     }
     /// <summary>
